@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use Illuminate\Http\Request;
-
+use Calendar;
 class CourseController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+    return view('calendar', compact('courses'));
     }
 
     /**
@@ -24,8 +25,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $courses = Course::all();
-    return view('calender', compact('courses'));
+    //
     }
 
     /**

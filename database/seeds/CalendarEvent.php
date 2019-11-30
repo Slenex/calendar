@@ -20,8 +20,8 @@ class CalendarEvent extends Seeder
                 'level' => 'online',
                 'partner' => 'online',
                 'address' => 'online',
-                'from_Datetime'=>'2017-05-10', 
-                'to_Datetime'=>'2017-05-15'
+                'from_Datetime'=>'2019-11-30', 
+                'to_Datetime'=>'2019-12-01'
             ],
             [
                 'title'=>'Java Session', 
@@ -31,8 +31,8 @@ class CalendarEvent extends Seeder
                 'level' => 'online',
                 'partner' => 'online',
                 'address' => 'online',
-                'from_Datetime'=>'2017-05-10', 
-                'to_Datetime'=>'2017-05-15'
+                'from_Datetime'=>'2019-11-25', 
+                'to_Datetime'=>'2019-12-11'
             ],
             [
                 'title'=>'PHP Session', 
@@ -42,8 +42,8 @@ class CalendarEvent extends Seeder
                 'level' => 'online',
                 'partner' => 'online',
                 'address' => 'online',
-                'from_Datetime'=>'2017-05-10', 
-                'to_Datetime'=>'2017-05-15'
+                'from_Datetime'=>'2019-11-05', 
+                'to_Datetime'=>'2019-11-08'
             ],
             [
                 'title'=>'Machine Learning Event', 
@@ -53,8 +53,8 @@ class CalendarEvent extends Seeder
                 'level' => 'online',
                 'partner' => 'online',
                 'address' => 'online',
-                'from_Datetime'=>'2017-05-10', 
-                'to_Datetime'=>'2017-05-15'
+                'from_Datetime'=>'2019-12-05', 
+                'to_Datetime'=>'2019-12-08'
             ],
             [
                 'title'=>'AI Event', 
@@ -64,8 +64,8 @@ class CalendarEvent extends Seeder
                 'level' => 'online',
                 'partner' => 'online',
                 'address' => 'online',
-                'from_Datetime'=>'2017-05-10', 
-                'to_Datetime'=>'2017-05-15'
+                'from_Datetime'=>'2019-10-05', 
+                'to_Datetime'=>'2019-10-08'
             ],
 
         ];
