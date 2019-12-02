@@ -14,4 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('{any}', 'LexaController@index');
+
+//Route::get('{any}', 'LexaController@index');
+Route::get('calendar', 'CourseController@index');
+
