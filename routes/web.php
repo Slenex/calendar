@@ -17,4 +17,5 @@ Route::get('/', function () {
 
 //Route::get('{any}', 'LexaController@index');
 Route::get('calendar', 'CourseController@index');
+Route::post('courseAdd', 'CourseController@store');
 

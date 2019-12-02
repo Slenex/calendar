@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use Illuminate\Http\Request;
 use Calendar;
+use Log;
 class CourseController extends Controller
 {
     /**
@@ -14,6 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
+        Log::info("inide index method");
         $courses = Course::all();
     return view('calendar', compact('courses'));
     }
@@ -36,7 +38,9 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       Course::create($request->all());
+       Log::info("inide store method");
+       return redirect('calendar');
     }
 
     /**

@@ -2337,7 +2337,15 @@ input[switch="dark"]:checked + label {
   float: left;
   margin-bottom: 0;
 }
+.add-Modal {
+  width: 65% !important;
+  max-width: 75% !important;
+}
 
+
+.add-Modal .modal-content {
+    padding: 2em;
+}
 .none-border .modal-footer {
   border-top: none;
 }
@@ -2430,7 +2438,7 @@ input[switch="dark"]:checked + label {
 }
 
 .fc-event .fc-time {
-  font-weight: 500;
+ display: none;
 }
 
 .external-event {

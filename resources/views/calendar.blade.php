@@ -68,7 +68,7 @@ $(document).ready(function() {
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-     var bg_task = ["bg-teal", "bg-purple", "bg-warning", "bg-muted", "bg-white", 
+     var bg_task = ["bg-teal", "bg-purple", "bg-warning", "bg-muted",  
      "bg-primary", "bg-success", "bg-brown", "bg-pink", "bg-info" ];
     var calendar =  $('#calendar').fullCalendar({
         header: {
@@ -97,7 +97,12 @@ $(document).ready(function() {
         allDaySlot: true,
         selectHelper: true,
         select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
+            $('#from_Datetime').val (moment(start).format('YYYY-MM-DD HH:mm:ss'));
+            $('#to_Datetime').val (moment(end).format('YYYY-MM-DD HH:mm:ss'));
+            $('#addModal').modal();
+          
+         var title =  $('#title').val();
+         $("#course_add").click(function(){
             if (title) {
                 calendar.fullCalendar('renderEvent',
                     {
@@ -113,6 +118,8 @@ $(document).ready(function() {
                     true // make the event "stick"
                 );
             }
+});
+            
             calendar.fullCalendar('unselect');
         },
         droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -156,15 +163,16 @@ $(document).ready(function() {
     ],
 
     eventClick: function(calEvent, jsEvent, view) {
-        $('#title').html (calEvent.title);
-        $('#partner').html (calEvent.partner);
-        $('#batch').html (calEvent.batch);
-        $('#language').html (calEvent.language);
-        $('#level ').html (calEvent.level);
-        $('#from_Datetime').html (moment(calEvent.start).format('DD-MM-YYYY HH:mm'));
-        $('#to_Datetime').html (moment(calEvent.end).format('DD-MM-YYYY HH:mm'));
+        $('#view_title').html (calEvent.title);
+        $('#view_partner').html (calEvent.partner);
+        $('#view_batch').html (calEvent.batch);
+        $('#view_language').html (calEvent.language);
+        $('#view_level ').html (calEvent.level);
+        $('#view_from_Datetime').html (moment(calEvent.start).format('DD-MM-YYYY HH:mm'));
+        $('#view_to_Datetime').html (moment(calEvent.end).format('DD-MM-YYYY HH:mm'));
         $('#viewModal').modal();
-    }
+    },
+
        
     });
 
@@ -172,28 +180,111 @@ $(document).ready(function() {
 });
 </script>
 
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog add-Modal" role="document">
+        <div class="modal-content">
+
+        <form action="courseAdd" method="POST">
+        @csrf <!-- {{ csrf_field() }} -->
+            <div class="modal-body">
+            <div class="form-group">
+            <div class="row">
+					<label for="staticEmail" class="col-sm-2 col-form-label ">Title:</label>
+					<div class="col-sm-10">
+						<select class="form-control" name="title" id="title">
+						<option>Machine Learning</option>
+						<option>Artificial Intelligence</option>
+						<option>UI Learning</option>
+						<option>Data Science</option>
+						<option>IOT</option>
+						</select>
+					</div>
+              </div>
+			  </div>
+
+              <div class="form-group">
+               <div class="row">
+              <div class="radio col-sm-6">
+                <label><input  type="radio" value="training_method" name="training_method" checked>Class Room</label>
+                </div>
+                <div class="radio col-sm-6">
+                <label><input  type="radio" value="training_method" name="training_method">Online</label>
+                </div>
+                
+                </div>
+                </div>
+			   <div class="form-group">
+               <div class="row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Batch:</label> <select class="form-control col-sm-4" name="batch" id="batch">
+                <option>Batch 1</option>
+                <option>Batch 2</option>
+                <option>Batch 3</option>
+                </select>
+                <label for="staticEmail" class="col-sm-2 col-form-label">Language:</label>  <select class="form-control col-sm-4" name="language" id="language">
+                <option>English</option>
+                <option>Tamil</option>
+                <option>Hindi</option>
+                </select>
+               
+               </div>
+			   </div>
+			   <div class="form-group">
+               <div class="row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Batch:</label>  <select class="form-control col-sm-4" name="level" id="level">
+                <option>Beginner</option>
+                <option>Intemediate</option>
+                <option>Advanced</option>
+                </select>
+				<label for="staticEmail" class="col-sm-2 col-form-label">Partner:</label>  <select class="form-control col-sm-4" name="partner" id="language">
+                <option>Peter</option>
+                <option>John</option>
+                <option>Stephen</option>
+                </select>
+            </div>
+              </div>
+			   <div class="form-group">
+                <div class="row">
+                    <label for="static_from_Datetime" class="col-sm-3 col-form-label">Start Time:</label>  
+                    <input type="text" class="form-control col-sm-3" name="from_Datetime" id="from_Datetime"/>
+                    <label for="static_to_Datetime" class="col-sm-3 col-form-label">End Time:</label> 
+                    <input type="text" class="form-control col-sm-3" name="to_datetime" id="to_Datetime"/>
+                </div>
+                </div>
+                <div class="form-group">
+                <div class="row">
+                <input  type="radio" class="col-sm-4" value="yes" name="isRepeat" checked>Class Room
+                </div>
+                </div>
+</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary"  id="course_add" value="Save">
+            </div>
+			</form>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <h4 id="title"> </h4>
+                <h4 id="view_title"> </h4>
                 <div>
-                    <span id="batch" class="badge badge-primary"></span>
-                    <span id="language" class="badge badge-success"></span>
-                    <span id="level" class="badge badge-dark"></span>
+                    <span id="view_batch" class="badge badge-primary"></span>
+                    <span id="view_language" class="badge badge-success"></span>
+                    <span id="view_level" class="badge badge-dark"></span>
                 </div>
-                Conduct By: <label id="partner"></label>
+                Conduct By: <label id="view_partner"></label>
                 <br />
-                Start time: <label id="from_Datetime"></label>
+                Start time: <label id="view_from_Datetime"></label>
                 <br />
 
-                End time: <label id="to_Datetime"></label>
+                End time: <label id="view_to_Datetime"></label>
                 <br />
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <input type="button" class="btn btn-primary" id="appointment_update" value="Save">
             </div>
         </div>
     </div>
